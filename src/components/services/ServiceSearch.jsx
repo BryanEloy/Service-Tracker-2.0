@@ -1,12 +1,17 @@
 import { useContext,useState } from "react";
 
 import ServiceContext from "../../context/services/ServiceContext";
+import TicketContext from "../../context/tickets/TicketContext";
 
-const ServiceSearch = () => {
+const ServiceSearch = ( {columnas=true} ) => {
 
     //Obtener la iformacion del state Service   
     const serviceContext= useContext(ServiceContext);
-    const {getServices, showError, error}= serviceContext;
+    const {services, getServiceInfo, getServices, showError, error}= serviceContext;
+
+    //Obtener la iformacion del state Ticket  
+    const ticketContext= useContext(TicketContext);
+    const {clearTicketSelected}= ticketContext;
 
     let [name, setName]= useState('');
 
@@ -21,27 +26,46 @@ const ServiceSearch = () => {
             showError();
            return 
         }
-
-        //Obtner el servicio 
+        //Obtener servicios relacionados con la busqueda
         getServices(service);
         setName(name='');       
     }
 
+    //Cargar la informacion del ticket selccionado en el state
+    const serviceInfo=(service) =>{
+        getServiceInfo(service.name);
+        //eliminamos informacion sobre tickets previos
+        clearTicketSelected();
+    }
+
     return ( 
-        <div className="contenedor-search">
+        <div className={columnas ?'columnas' : 'filas'}>
+            <div className="contenedor-search">
 
-            <input onChange={handleChange} value={name} 
-                className="search" type="text" placeholder="&#xf002; Search.."/>
-            <div>
-                <input type="checkbox" /><label> Include inactive services </label>
-            </div>            
-            <button onClick={handleClick} className="btn btn-primario">Search</button>
+                <input onChange={handleChange} value={name} 
+                    className="search" type="text" placeholder="&#xf002; Search.."/>
+                <div>
+                    <input type="checkbox" /><label> Include inactive services </label>
+                </div>            
+                <button onClick={handleClick} className="btn btn-primario">Search</button>
 
-            {error
-                ? <p className="mensaje error">Escriba el nombre del servicio</p>
-                : null
-            }
+                {error
+                    ? <p className="mensaje error">Escriba el nombre del servicio</p>
+                    : null
+                }
+            </div>   
+            <div className="border border-radius">
+                <h3>Results:</h3>
+                {services
+                    ?services.map( (service, index) =>(
+                        <button key={index} type='button' className="btn btn-blank" onClick={()=> serviceInfo(service)}>
+                        - {service.name}</button>
+                    ))
+                    :null
+                }
+            </div>
         </div>
+        
      );
 }
  

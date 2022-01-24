@@ -12,8 +12,7 @@ const PrivateRoute = ( {children} ) => {
         userInformation();
         //eslint-disbale-next-line
     },[]);
-
-    return !autentication && chargin ? <Navigate to="/" /> : children 
+    return (!autentication && chargin) ? <Navigate to="/" /> : children
 }
  
 export default PrivateRoute;

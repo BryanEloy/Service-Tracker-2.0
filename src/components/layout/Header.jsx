@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 import AuthContext from '../../context/auth/AuthContext';
 
@@ -22,10 +23,12 @@ const Header = () => {
                                     
             <div className='contenedor-header'>              
                 {user 
-                    ?<p className="nombre-usuario"> Hola <span>{user.name}</span></p>
+                    ?<p className="nombre-usuario"> Hello <span>{user.name}</span></p>
                     : null} 
                 <nav className="nav-principal">
-                    <button className="btn btn-logOut" onClick={()=> logOut()}>Cerrar Sesion</button>
+                    <Link to={'/services'} className="btn btn-nav">Add Services</Link>
+                    <Link to={'/tickets'} className="btn btn-nav">Add Tickets</Link>
+                    <button className="btn btn-logOut" onClick={()=> logOut()}>Logout</button>
                 </nav> 
             </div>
         

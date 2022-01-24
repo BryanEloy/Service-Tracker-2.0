@@ -20,7 +20,7 @@ const Login = () => {
     useEffect(()=>{
         userInformation();
         if(autentication)
-            history('/services');             
+            history('/search');             
         
         if(mesage)
             showAlert(mesage.msg, mesage.category);
@@ -56,13 +56,13 @@ const Login = () => {
                 :null}
 
             <div className="contenedor-form sombra-dark">
-                <h1>Iniciar sesion</h1>
+                <h1>Login</h1>
 
                 <form onSubmit={handleSubmit}>
                     
                     <div className="campo-form">
-                        <label htmlFor="email">E-mail</label>
-                        <input type="email" id="email" name="email" placeholder="@tumail" value={user.email}
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="@yourmail" value={user.email}
                                 onChange={handleChange}/>
 
                     </div>
@@ -75,10 +75,10 @@ const Login = () => {
                     </div>
 
                     <div className="campo-form">
-                        <input type="submit" className="btn btn-primario btn-block" value="Iniciar" />
+                        <input type="submit" className="btn btn-primario btn-block" value="Signin" />
                     </div>
 
-                    <Link to={'/newAcount'} className="enlace-cuenta"> Obtener Cuenta</Link>
+                    <Link to={'/newAcount'} className="enlace-cuenta">Get an account</Link>
                 </form>
             </div>
         </div>

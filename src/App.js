@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './components/auth/Login';
 import NewAcount from './components/auth/NewAcount';
 import ServicesMenu from './components/services/ServicesMenu';
+import ServiceForm from './components/services/ServiceForm';
+import TicketForm from './components/tickets/TicketForm';
 
 import ServiceState from './context/services/ServiceState';
 import TicketState from './context/tickets/TicketState';
@@ -32,11 +34,13 @@ function App() {
 
           <Route exact path='/' element={ <Login/> }/>
           <Route exact path='/newAcount' element={<NewAcount/>}/>
-          <Route exact path='/services' element={
+          <Route exact path='/search' element={
             <PrivateRoute>
               <ServicesMenu/>
             </PrivateRoute>
           }/> 
+          <Route exact path='/services' element={ <ServiceForm/> }/> 
+          <Route exact path='/tickets' element={ <TicketForm/> }/> 
 
         </Routes>
       </Router>

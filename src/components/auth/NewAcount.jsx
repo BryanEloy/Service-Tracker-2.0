@@ -20,7 +20,7 @@ const NewAcount = (props) => {
     useEffect(()=>{
         userInformation();
         if(autentication)
-            history('/services');             
+            history('/search');             
         
         if(mesage)
             showAlert(mesage.msg, mesage.category);
@@ -68,39 +68,39 @@ const NewAcount = (props) => {
                 :null}
 
             <div className="contenedor-form sombra-dark">
-                <h1>Obtener una cuenta</h1>
+                <h1>Get an account</h1>
 
                 <form onSubmit={handleSubmit}>
 
                     <div className="campo-form">
-                        <label htmlFor="name">Nombre</label>
-                        <input type="text" id="name" name="name" placeholder="Tu nombre" value={user.name}
+                        <label htmlFor="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your nombre" value={user.name}
                                 onChange={handleChange}/>
                     </div>
 
                     <div className="campo-form">
-                        <label htmlFor="email">E-mail</label>
-                        <input type="email" id="email" name="email" placeholder="@tumail" value={user.email}
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="@yourmail" value={user.email}
                                 onChange={handleChange}/>
                     </div>
 
                     <div className="campo-form">
-                        <label htmlFor="password">Contraseña</label>
+                        <label htmlFor="password">Password</label>
                         <input type="password" id="password" name="password" value={user.password}
                                 onChange={handleChange}/>
                     </div>
 
                     <div className="campo-form">
-                        <label htmlFor="password2">Confirmar contraseña</label>
+                        <label htmlFor="password2">Confirm Password</label>
                         <input type="password" id="password2" name="password2" value={user.password2}
                                 onChange={handleChange}/>
                     </div>
 
                     <div className="campo-form">
-                        <input type="submit" className="btn btn-primario btn-block" value="Crear Cuenta" />
+                        <input type="submit" className="btn btn-primario btn-block" value="Creaate" />
                     </div>
 
-                    <Link to={'/'} className="enlace-cuenta"> Volver al inicio</Link>
+                    <Link to={'/'} className="enlace-cuenta">Return to Login</Link>
 
                 </form>
             </div>

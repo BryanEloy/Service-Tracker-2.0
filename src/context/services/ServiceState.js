@@ -3,46 +3,34 @@ import React, {useReducer} from 'react';
 import ServiceContext from "./ServiceContext";
 import ServiceReducer from "./ServiceReducer";
 
-import { 
-    SERVICE_ADD, 
-    SERVICE_FORM, 
+import {  
     SERVICES_GET, 
-    VALIDATE_FORM, 
     SELECT_SERVICE, 
     DELETE_SERVICE,
-    SERVICE_ERROR  } from '../../types';
+    SERVICE_ERROR,
+    SERVICE_SEARCH  } from '../../types';
 
 import clienteAxios from '../../config/axios';
 
 const ServiceState= props =>{
 
     const initialState={
-        services: {},
-        form: false,
-        error: false,
-        actual_service: null,
+        services: [],
+        actual_service: {},
         mesage: null
     }
 
     //Dispatch para ejecutar las acciones
     const [state, dispatch]= useReducer(ServiceReducer, initialState);
 
-    //Mostrar el formulario
-    const showForm= ()=>{
-        dispatch({
-            type: SERVICE_FORM
-        })
-    }
 
-    //Obtener servicios
-    const getServices= async (name)=>{
-        
+    //Obtener la informacion de unn servicio 
+    const getServiceInfo= async(name)=>{
         try {
             const res= await clienteAxios.get('/api/services', {params: {name}});
-
-            
+      
             dispatch({
-                type: SERVICES_GET,
+                type: SERVICE_SEARCH,
                 payload: res.data.services[0]
             });
 
@@ -58,15 +46,14 @@ const ServiceState= props =>{
         }
     }
 
-    //Agregar servicios
-    const addService= async service=>{
-
+    //Buscar servicios
+    const getServices= async ( term='', colection='services')=>{
         try {
-            const res= await clienteAxios.post('/api/services', service);
-            //Agregar el servicio en el state
+            const res= await clienteAxios.get( `/api/search/${colection}/${term}` );
+            
             dispatch({
-                type: SERVICE_ADD,
-                payload: res.data.service
+                type: SERVICES_GET,
+                payload: res.data.results
             });
 
         } catch (error) {
@@ -79,13 +66,25 @@ const ServiceState= props =>{
                 payload: alert
             });
         }
+        
     }
 
-    //Validar errores en el formulario
-    const showError= ()=>{
-        dispatch({
-            type: VALIDATE_FORM
-        })
+    //Agregar servicios
+    const addService= async service=>{
+
+        try {
+            await clienteAxios.post('/api/services', service);
+
+        } catch (error) {    
+            const alert= {
+                msg: error.response.data.error,
+                category: 'alerta-error'
+            }
+            dispatch({
+                type: SERVICE_ERROR,
+                payload: alert
+            });
+        }
     }
 
     //Seleccionar un servicio
@@ -121,16 +120,13 @@ const ServiceState= props =>{
     return(
         <ServiceContext.Provider value={{
             services: state.services, 
-            form: state.form,
-            error: state.error,
             mesage: state.mesage,
             actual_service: state.actual_service,
-            showForm,
-            showError,
             getServices,
             addService,
             selectService,
-            deleteService
+            deleteService,
+            getServiceInfo
             }}
         >
             {props.children}

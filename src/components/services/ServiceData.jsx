@@ -6,7 +6,7 @@ const ServiceData = () => {
 
     //Obtener la iformacion del state Service   
     const serviceContext= useContext(ServiceContext);
-    const {services}= serviceContext;
+    const {actual_service}= serviceContext;
 
     const [data, setData]= useState({
         info:'',
@@ -14,35 +14,35 @@ const ServiceData = () => {
     });
 
     const getTestingData=()=>{
-        if(!services.testing){
+        if(!actual_service.testing){
             setData({...data, available: false});
             return
         }
         setData( {...data, 
-            info: services.testing,
+            info: actual_service.testing,
             available: true
         });
     }
 
     const getHistoryData=()=>{
-        if(!services.history){
+        if(!actual_service.history){
             setData({...data, available: false});
             return
         }
         setData( {...data,
             available: true,
-            info: services.history
+            info: actual_service.history
         });
     }
 
     const getSpecialData=()=>{
-        if(!services.files){
+        if(!actual_service.files){
             setData({...data, available: false});
             return
         }
         setData( {...data,
             available: true,
-            info: services.files
+            info: actual_service.files
         });
     }
 

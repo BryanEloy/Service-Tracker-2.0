@@ -9,7 +9,7 @@ const Tickets = () => {
 
     //Obtener la iformacion del state Service   
     const serviceContext= useContext(ServiceContext);
-    const {services}= serviceContext;
+    const {actual_service}= serviceContext;
 
     //Obtener la iformacion del state Ticket  
     const ticketContext= useContext(TicketContext);
@@ -17,10 +17,11 @@ const Tickets = () => {
 
     useEffect(()=>{
         //Obtenemos los tickets del servvicio
-        if(services)       
-            getTickets(services._id);
+        if(actual_service){
+            getTickets(actual_service._id);
+        }               
 
-    },[services])
+    },[actual_service])
 
     return ( 
 
@@ -44,6 +45,7 @@ const Tickets = () => {
                             <h3>{ticket_selected.name} </h3>
                             <p> <span>Description:</span> {ticket_selected.description}</p>
                             <p>< span>Date: </span> { ticket_selected.date.toString().split('T')[0] }</p>
+                            <p>< span>Creator: </span> { ticket_selected.creator.name }</p>
                         </div> 
                        
                     :null
