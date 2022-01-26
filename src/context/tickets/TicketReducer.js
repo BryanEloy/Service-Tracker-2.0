@@ -4,7 +4,8 @@ import {
     SERVICE_TICKETS, 
     EDIT_TICKET, 
     CLEAR_TICKET_SELECTED,
-    TICKET_ERROR } from "../../types"
+    TICKET_ERROR,
+    CLEAR_TICKETS} from "../../types"
 
 
 export default (state, action)=>{
@@ -37,7 +38,7 @@ export default (state, action)=>{
                 ...state,
                 ticket_selected: action.payload
             }
-        //seleccionar un ticket
+        //Borrar informacion del ticket seleccionado
         case CLEAR_TICKET_SELECTED:
             return{
                 ...state,
@@ -49,6 +50,14 @@ export default (state, action)=>{
                 ...state,
                 message: action.payload
             }
+        //Limpiar informacion de los tickets de un servicio
+        case CLEAR_TICKETS:{
+            return{
+              ...state,
+              service_tickets: [],
+              message: null
+            }
+        }
 
         default:
             return state

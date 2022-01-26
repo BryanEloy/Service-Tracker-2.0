@@ -97,7 +97,7 @@ const NewAcount = (props) => {
                     </div>
 
                     <div className="campo-form">
-                        <input type="submit" className="btn btn-primario btn-block" value="Creaate" />
+                        <input type="submit" className="btn btn-primario btn-block" value="Create" />
                     </div>
 
                     <Link to={'/'} className="enlace-cuenta">Return to Login</Link>

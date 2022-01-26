@@ -75,7 +75,7 @@ const Login = () => {
                     </div>
 
                     <div className="campo-form">
-                        <input type="submit" className="btn btn-primario btn-block" value="Signin" />
+                        <input type="submit" className="btn btn-primario btn-block" value="Login" />
                     </div>
 
                     <Link to={'/newAcount'} className="enlace-cuenta">Get an account</Link>

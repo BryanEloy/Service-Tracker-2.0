@@ -46,8 +46,9 @@ const ServiceForm = () => {
         setService( {...service, [e.target.name]: e.target.value } )
     }
 
+    //Use navigate para redireccionar a la pagina principal
     const history= useNavigate();
-    const handleSubmit= (e)=>{
+    const handleSubmit= async (e)=>{
         e.preventDefault();
         //Validar name
         if(service.name.trim()===''){
@@ -55,12 +56,14 @@ const ServiceForm = () => {
             return;
         }        
         //Pasarlo al action para guardar la info
-        addService(service);
-        showAlert('Servicio Agregado', 'alerta-ok');
-        setTimeout(() => {
-         history('/search');   
-        }, 1000);
-        
+        const success= await addService(service);
+        //si hubo exito al crrar el servicio
+        if(success){
+            showAlert('Servicio Agregado', 'alerta-ok');
+            setTimeout(() => {           
+                history('/search');      
+            }, 1100);
+        }              
     }
 
     return ( 

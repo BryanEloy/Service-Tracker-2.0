@@ -18,8 +18,7 @@ const TicketForm = () => {
 
     //Extraer la informacion del context service
     const serviceContext= useContext(ServiceContext);
-    const {actual_service}= serviceContext; 
-
+    const {actual_service, clearServices}= serviceContext;
 
     //Extraer la informacion del context de alerta
     const alertContext= useContext(AlertContext);
@@ -33,7 +32,6 @@ const TicketForm = () => {
         userInformation();
 
         if(message){
-            console.log('error')
             showAlert(message.msg, message.category);
         }          
         //eslint-disable-next-line
@@ -49,9 +47,9 @@ const TicketForm = () => {
     const handleChange= (e)=>{
         setTicket( {...ticket, [e.target.name]: e.target.value } )
     }
-
+    //Use navigate para redireccionar a la pagina principal
     const history= useNavigate();
-    const handleSubmit= (e)=>{
+    const handleSubmit= async(e)=>{
         e.preventDefault();
         //Validar name
         if(ticket.name.trim()===''){
@@ -65,12 +63,16 @@ const TicketForm = () => {
         ticket.service= actual_service._id; 
 
         //Pasarlo al action para guardar la info
-        addTicket(ticket);
-        showAlert('Ticket Agregado', 'alerta-ok');
-        setTimeout(() => {
-            history('/search');   
-        }, 1000);
-        
+        const success= await addTicket(ticket);
+        //si hubo exito al crrar el ticket
+        if(success){
+            showAlert('Ticket Agregado', 'alerta-ok');
+            setTimeout(() => {
+                history('/search');   
+            }, 1100);
+            clearServices()
+        }
+               
     }
 
     return ( 

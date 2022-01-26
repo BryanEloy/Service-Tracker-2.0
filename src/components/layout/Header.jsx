@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import {useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import AuthContext from '../../context/auth/AuthContext';
@@ -14,10 +15,16 @@ const Header = () => {
         //eslint-disable-next-line
     },[]);
 
+    const history= useNavigate();
+    const toLogin= ()=>{
+        logOut();
+        history('/'); 
+    }
+
     return ( 
         <header className="app-header">
             <div className='separacion'>
-                <a className="logo" href='#!'></a>
+                <a className="logo" href='/search'></a>
                 <h3 className='titulo'>Serarch by services</h3>
             </div>
                                     
@@ -28,7 +35,7 @@ const Header = () => {
                 <nav className="nav-principal">
                     <Link to={'/services'} className="btn btn-nav">Add Services</Link>
                     <Link to={'/tickets'} className="btn btn-nav">Add Tickets</Link>
-                    <button className="btn btn-logOut" onClick={()=> logOut()}>Logout</button>
+                    <button className="btn btn-logOut" onClick={()=>toLogin() }>Logout</button>
                 </nav> 
             </div>
         

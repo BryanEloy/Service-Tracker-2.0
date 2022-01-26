@@ -9,7 +9,8 @@ import {
     SELECT_TICKET, 
     EDIT_TICKET, 
     CLEAR_TICKET_SELECTED,
-    TICKET_ERROR } from '../../types';
+    TICKET_ERROR,
+    CLEAR_TICKETS } from '../../types';
 
 import clienteAxios from '../../config/axios';
 
@@ -42,7 +43,9 @@ const TicketState= props=>{
     //Agregar nuevo ticket al servicio
     const addTicket= async ticket=>{
         try {
-            await clienteAxios.post('/api/tickets', ticket); 
+            await clienteAxios.post('/api/tickets', ticket);
+            dispatch({type: CLEAR_TICKETS});
+            return true
 
         } catch (error) {
             const alert= {

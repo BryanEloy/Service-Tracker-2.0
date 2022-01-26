@@ -3,7 +3,8 @@ import {
     SELECT_SERVICE, 
     DELETE_SERVICE,
     SERVICE_ERROR,
-    SERVICE_SEARCH } from "../../types"
+    SERVICE_SEARCH,
+    CLEAR_SERVICES } from "../../types"
 
 export default (state, action)=>{
 
@@ -42,6 +43,14 @@ export default (state, action)=>{
             return{
                 ...state,
                 mesage: action.payload
+            }
+        //Elimina la informacion del state
+        case CLEAR_SERVICES:
+            return{
+                ...state,
+                services: [],
+                actual_service: {},
+                mesage: null
             }
             
         default:

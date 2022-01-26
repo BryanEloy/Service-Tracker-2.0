@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import ServiceContext from "../../context/services/ServiceContext";
 
@@ -12,6 +12,10 @@ const ServiceData = () => {
         info:'',
         available: true,
     });
+
+    useEffect(()=>{
+        setData({...data, info:'', available: true});
+    },[actual_service]);
 
     const getTestingData=()=>{
         if(!actual_service.testing){

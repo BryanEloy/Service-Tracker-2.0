@@ -8,7 +8,8 @@ import {
     SELECT_SERVICE, 
     DELETE_SERVICE,
     SERVICE_ERROR,
-    SERVICE_SEARCH  } from '../../types';
+    SERVICE_SEARCH,
+    CLEAR_SERVICES  } from '../../types';
 
 import clienteAxios from '../../config/axios';
 
@@ -74,8 +75,10 @@ const ServiceState= props =>{
 
         try {
             await clienteAxios.post('/api/services', service);
+            dispatch({ type: CLEAR_SERVICES});
+            return true
 
-        } catch (error) {    
+        } catch (error) { 
             const alert= {
                 msg: error.response.data.error,
                 category: 'alerta-error'
@@ -92,7 +95,7 @@ const ServiceState= props =>{
         dispatch({
             type: SELECT_SERVICE,
             payload: serviceId
-        })
+        });
     }
 
     //Eliminar un servicio
@@ -116,6 +119,12 @@ const ServiceState= props =>{
             });
         }        
     }
+    //Elimina la informacion del servicio buscado y  seleccionado
+    const clearServices= ()=>{
+        dispatch({
+            type: CLEAR_SERVICES
+        });
+    }
 
     return(
         <ServiceContext.Provider value={{
@@ -126,7 +135,8 @@ const ServiceState= props =>{
             addService,
             selectService,
             deleteService,
-            getServiceInfo
+            getServiceInfo,
+            clearServices
             }}
         >
             {props.children}
