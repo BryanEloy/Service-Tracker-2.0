@@ -41,7 +41,7 @@ const Login = () => {
 
         //Validar que no haya campos vacios
         if(user.email.trim()===''||  user.password===''){
-            showAlert('Todos los campos son obligatorios', 'alerta-error');
+            showAlert('All fields are required', 'alerta-error');
             return;
         }
 

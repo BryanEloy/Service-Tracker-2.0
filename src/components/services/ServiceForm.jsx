@@ -52,14 +52,14 @@ const ServiceForm = () => {
         e.preventDefault();
         //Validar name
         if(service.name.trim()===''){
-            showAlert('Nombre obligatorio', 'alerta-error');
+            showAlert('The name is required', 'alerta-error');
             return;
         }        
         //Pasarlo al action para guardar la info
         const success= await addService(service);
         //si hubo exito al crrar el servicio
         if(success){
-            showAlert('Servicio Agregado', 'alerta-ok');
+            showAlert('Saved service', 'alerta-ok');
             setTimeout(() => {           
                 history('/search');      
             }, 1100);

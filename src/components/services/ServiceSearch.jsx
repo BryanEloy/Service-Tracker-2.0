@@ -19,7 +19,7 @@ const ServiceSearch = ( {columnas=true} ) => {
         setName( name= e.target.value );
     }
 
-    const handleClick= ()=>{
+    const handleSubmit= ()=>{
         //Validar el nombre
         const service= name.trim();
         if(service===''){
@@ -42,17 +42,20 @@ const ServiceSearch = ( {columnas=true} ) => {
         <div className={columnas ?'columnas' : 'filas'}>
             <div className="contenedor-search">
 
-                <input onChange={handleChange} value={name} 
-                    className="search" type="text" placeholder="&#xf002; Search.."/>
-                <div>
-                    <input type="checkbox" /><label> Include inactive services </label>
-                </div>            
-                <button onClick={handleClick} className="btn btn-primario">Search</button>
+                <form onSubmit={handleSubmit}>
+                    <input onChange={handleChange} value={name} 
+                        className="search" type="text" placeholder="&#xf002; Search.."/>
+                    <div>
+                        <input type="checkbox" /><label> Include inactive services </label>
+                    </div>            
+                    <button type="submit" className="btn btn-primario">Search</button>
 
-                {error
-                    ? <p className="mensaje error">Escriba el nombre del servicio</p>
-                    : null
-                }
+                    {error
+                        ? <p className="mensaje error">Search by service's name</p>
+                        : null
+                    }
+                </form>
+
             </div>   
             <div className="border border-radius">
                 <h3>Results:</h3>

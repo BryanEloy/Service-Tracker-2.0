@@ -43,17 +43,17 @@ const NewAcount = (props) => {
         e.preventDefault();
         //Validar que no haya campos vacios
         if(user.name.trim()===''|| user.email.trim()===''|| user.password===''|| user.password2===''){
-            showAlert('Todos los campos son obligatorios', 'alerta-error');
+            showAlert('All fields are required', 'alerta-error');
             return;
         }
         //Validar que el password sea de minimo 6 caracteres
         if(user.password.length < 6){
-            showAlert('El password debe tener minimo 6 caracteres', 'alerta-error');
+            showAlert('The password must be at least 6 characters long', 'alerta-error');
             return;
         }
         //Comparar los 2 passwords
         if(user.password !== user.password2){
-            showAlert('Las contraseñas no coinciden', 'alerta-error');
+            showAlert('Passwords do not match', 'alerta-error');
             return;
         }
         //Pasarlo al action para guardar la info
