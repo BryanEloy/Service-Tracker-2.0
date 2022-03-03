@@ -19,7 +19,8 @@ const ServiceSearch = ( {columnas=true} ) => {
         setName( name= e.target.value );
     }
 
-    const handleSubmit= ()=>{
+    const handleSubmit= (e)=>{
+        e.preventDefault();
         //Validar el nombre
         const service= name.trim();
         if(service===''){
@@ -47,7 +48,7 @@ const ServiceSearch = ( {columnas=true} ) => {
                 <div>
                     <input type="checkbox" /><label> Include inactive services </label>
                 </div>            
-                <button type="submit" className="btn btn-primario">Search</button>
+                <input type="submit" className="btn btn-primario" value="Search"/>
                 {error
                     ? <p className="mensaje error">Search by service's name</p>
                     : null
