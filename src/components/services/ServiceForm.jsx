@@ -59,7 +59,7 @@ const ServiceForm = () => {
         const success= await addService(service);
         //si hubo exito al crrar el servicio
         if(success){
-            showAlert('Saved service', 'alerta-ok');
+            showAlert('Service Added', 'alerta-ok');
             setTimeout(() => {           
                 history('/search');      
             }, 1100);

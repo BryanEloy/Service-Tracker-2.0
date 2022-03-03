@@ -53,11 +53,11 @@ const TicketForm = () => {
         e.preventDefault();
         //Validar name
         if(ticket.name.trim()===''){
-            showAlert('Nombre obligatorio', 'alerta-error');
+            showAlert('Required Name', 'alerta-error');
             return;
         }
         if(!actual_service){
-            showAlert('Selcciona un servicio para agregar el ticket', 'alerta-error');
+            showAlert('Select a service to add the ticket', 'alerta-error');
             return;
         }
         ticket.service= actual_service._id; 
@@ -66,7 +66,7 @@ const TicketForm = () => {
         const success= await addTicket(ticket);
         //si hubo exito al crrar el ticket
         if(success){
-            showAlert('Ticket Agregado', 'alerta-ok');
+            showAlert('Ticket Added', 'alerta-ok');
             setTimeout(() => {
                 history('/search');   
             }, 1100);
