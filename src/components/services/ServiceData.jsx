@@ -63,7 +63,7 @@ const ServiceData = () => {
             <div>
                 {data.available
                     ?  <p>{data.info}</p>
-                    : <p>No hay informacion</p>
+                    : <p>No Data</p>
                 }
             </div>
             

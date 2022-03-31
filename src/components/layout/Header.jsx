@@ -25,7 +25,7 @@ const Header = () => {
         <header className="app-header">
             <div className='separacion'>
                 <a className="logo" href='/search'></a>
-                <h3 className='titulo'>Serarch by services</h3>
+                <h3 className='titulo'>Search by services</h3>
             </div>
                                     
             <div className='contenedor-header'>              
