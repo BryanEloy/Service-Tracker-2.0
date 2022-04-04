@@ -7,7 +7,7 @@ const ServiceSearch = ( {columnas=true} ) => {
 
     //Obtener la iformacion del state Service   
     const serviceContext= useContext(ServiceContext);
-    const {services, getServiceInfo, getServices, showError, error}= serviceContext;
+    const {services, getServiceInfo, getServices, showError}= serviceContext;
 
     //Obtener la iformacion del state Ticket  
     const ticketContext= useContext(TicketContext);
@@ -44,15 +44,11 @@ const ServiceSearch = ( {columnas=true} ) => {
 
             <form className="contenedor-search" onSubmit={handleSubmit}>
                 <input onChange={handleChange} value={name} 
-                    className="search" type="text" placeholder="&#xf002; Search.."/>
+                    className="search" type="text" placeholder="&#xf002; Search.." required/>
                 <div>
                     <input type="checkbox" /><label> Include inactive services </label>
                 </div>            
                 <input type="submit" className="btn btn-primario" value="Search"/>
-                {error
-                    ? <p className="mensaje error">Search by service's name</p>
-                    : null
-                }
             </form>
 
             <div className="border border-radius">

@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 
 import AuthContext from '../../context/auth/AuthContext';
 import ServiceContext from '../../context/services/ServiceContext';
+import TicketContext from '../../context/tickets/TicketContext';
 
 import Header from '../layout/Header';
 import ServiceWorkflow from './ServiceWorkflow';
@@ -16,7 +17,11 @@ const ServicesMenu = () => {
     const authContext= useContext(AuthContext);
     const {userInformation}= authContext; 
 
-    //Extraer la informacion del context de auth
+    //Extraer la informacion del context de TICKET
+    const ticketContext= useContext(TicketContext);
+    const {clearTicketSelected}= ticketContext; 
+
+    //Extraer la informacion del context de servicios
     const serviceContext= useContext(ServiceContext);
     const {clearServices}= serviceContext; 
     
@@ -24,6 +29,7 @@ const ServicesMenu = () => {
     useEffect(()=>{
         userInformation();
         clearServices();
+        clearTicketSelected();
     },[]);
 
     return ( 
